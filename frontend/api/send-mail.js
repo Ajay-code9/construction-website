@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
     }
 
     // Get environment variables from Vercel
-    const ownerEmail = process.env.OWNER_EMAIL || "pleaseprimededo@gmail.com";
+    const ownerEmail = process.env.OWNER_EMAIL || "arjunjayani123@gmail.com";
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
 
@@ -114,5 +114,4 @@ Additional Details: ${additionalDetails || "N/A"}
     });
   }
 };
-
 

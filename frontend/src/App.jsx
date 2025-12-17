@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import ParticleBackground from "./components/ParticleBackground";
 import ContactStripBackground from "./components/ContactStripBackground";
 
+// Contact email displayed on website
+const CONTACT_EMAIL = "arjunjayani123@gmail.com"; // Change this to your preferred email
+
 const SECTIONS = [
   { id: "home", label: "Home" },
   { id: "services", label: "Services" },
@@ -71,16 +74,26 @@ function Header() {
         {/* Logo + tagline */}
         <div className="flex items-center gap-3 lg:gap-6">
             <div className="flex items-center gap-2">
-            {/* Premium logo with gradient */}
-            <div className="group relative">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brandYellow via-brandYellow/80 to-brandBlue blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-lg bg-gradient-to-br from-white to-gray-100 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brandBlue/20 to-brandYellow/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative flex items-center justify-center">
-                  <div className="h-3.5 w-3.5 lg:h-4 w-4 -skew-x-6 bg-gradient-to-br from-brandBlue to-blue-700 shadow-md" />
-                  <div className="-ml-1 h-3.5 w-3.5 lg:h-4 w-4 -skew-x-6 bg-gradient-to-br from-brandYellow to-yellow-500 shadow-md" />
-                </div>
-              </div>
+            {/* Logo with skewed rectangles - matches favicon exactly */}
+            <div className="group relative transition-all duration-300 group-hover:scale-110">
+              <svg 
+                className="h-10 w-10 lg:h-12 lg:w-12" 
+                viewBox="0 0 64 64" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* White background with rounded corners */}
+                <rect width="64" height="64" rx="14" fill="#ffffff" className="transition-all duration-300 group-hover:shadow-lg" />
+                
+                {/* First skewed rectangle - Dark Blue */}
+                <rect x="12" y="18" width="20" height="28" rx="2" fill="#424b5b" transform="skewX(-8)" />
+                
+                {/* Second skewed rectangle - Golden Yellow */}
+                <rect x="32" y="18" width="20" height="28" rx="2" fill="#f5b335" transform="skewX(-8)" />
+                
+                {/* Subtle shadows for depth */}
+                <rect x="12.5" y="18.5" width="20" height="28" rx="2" fill="#424b5b" opacity="0.2" transform="skewX(-8)" />
+                <rect x="32.5" y="18.5" width="20" height="28" rx="2" fill="#f5b335" opacity="0.2" transform="skewX(-8)" />
+              </svg>
             </div>
             
             <div className="flex flex-col">
@@ -248,7 +261,7 @@ export default function App() {
 
   // Generate WhatsApp message link
   const generateWhatsAppLink = (formData) => {
-    const whatsappNumber = "9877443093"; // Your WhatsApp business number
+    const whatsappNumber = "7740022757"; // Your WhatsApp business number
     
     const message = `Hello, I want a quote.
 
@@ -410,7 +423,7 @@ Details: ${formData.message || "N/A"}`;
       {/* Hero / Home with slow moving background */}
       <section
         id="home"
-        className="group relative flex min-h-[90vh] items-center justify-center overflow-hidden"
+        className="group relative flex min-h-[90vh] items-center justify-center overflow-hidden cursor-default"
       >
         {/* Animated background layers with parallax */}
         <div
@@ -422,14 +435,14 @@ Details: ${formData.message || "N/A"}`;
         />
         
         {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/60 to-slate-900/40" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/60 to-slate-900/40" />
         
         {/* Floating particles effect */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute h-1 w-1 rounded-full bg-brandYellow/20 animate-pulse"
+              className="pointer-events-none absolute h-1 w-1 rounded-full bg-brandYellow/20 animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -447,23 +460,212 @@ Details: ${formData.message || "N/A"}`;
               : "opacity-0 translate-y-10"
           }`}
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brandYellow animate-fade-in">
+          <p className="select-none cursor-default pointer-events-none text-sm font-semibold uppercase tracking-[0.3em] text-brandYellow animate-fade-in">
             Quality Building Materials · Fast Delivery · +91 77400 22757
           </p>
-          <h1 className="max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-            <span className="inline-block">Everything You Need</span>
-            <br />
-            <span className="inline-block underline decoration-brandYellow decoration-4">
-              To Build Stronger, Faster.
-            </span>
+          <h1 className="select-none cursor-default pointer-events-none max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+            <span className="inline-block">Bulk Construction Materials Supplier</span>
           </h1>
-          <button
-            onClick={() => setShowQuoteModal(true)}
-            className="group/btn mt-4 rounded bg-brandBlue px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/40 transition-all duration-300 hover:scale-105 hover:bg-brandYellow hover:text-brandBlue hover:shadow-xl hover:ring-brandYellow"
-          >
-            <span className="relative z-10">Get Free Material Quote</span>
-            <span className="absolute inset-0 rounded bg-brandYellow opacity-0 transition-opacity duration-300 group-hover/btn:opacity-20" />
-          </button>
+          <p className="select-none cursor-default pointer-events-none max-w-2xl text-lg font-medium text-white/90 md:text-xl lg:text-2xl">
+            Gravel (Bajri) & Stone (Gitti), Bricks, Cement, Tiles & Road Materials with Fast Delivery
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <button
+              onClick={() => setShowQuoteModal(true)}
+              className="group/btn relative cursor-pointer rounded bg-brandBlue px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/40 transition-all duration-300 hover:scale-105 hover:bg-brandYellow hover:text-brandBlue hover:shadow-xl hover:ring-brandYellow"
+            >
+              <span className="relative z-10">Get Material Quote</span>
+              <span className="absolute inset-0 rounded bg-brandYellow opacity-0 transition-opacity duration-300 group-hover/btn:opacity-20 pointer-events-none" />
+            </button>
+            <a
+              href="tel:+917740022757"
+              className="cursor-pointer rounded border-2 border-white/60 bg-transparent px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/40 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-brandBlue hover:shadow-xl"
+            >
+              Call for Bulk Orders
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* MATERIALS WE SUPPLY & WHO WE SERVE - Side by Side on Large Screens */}
+      <section
+        id="materials"
+        className={`mx-auto max-w-7xl px-6 py-20 transition-all duration-1000 md:py-24 ${
+          visibleSections.has("materials") || visibleSections.has("who-we-serve")
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
+        <div className="grid gap-12 lg:grid-cols-2 xl:gap-16">
+          {/* MATERIALS WE SUPPLY */}
+          <div className="flex flex-col">
+            <div className="min-h-[180px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brandYellow">
+                What we offer
+              </p>
+              <h2 className="mt-3 text-4xl font-extrabold uppercase tracking-[0.15em] text-brandBlue md:text-5xl">
+                <span className="text-brandYellow">.</span>Materials We Supply
+              </h2>
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+                Quality construction materials for all your building and infrastructure needs.
+              </p>
+              <div className="mt-6 h-0.5 w-24 bg-brandYellow" />
+            </div>
+
+            <div className="mt-12 grid gap-6 grid-cols-2">
+          {[
+            { 
+              name: "Gravel (Bajri) & Stone (Gitti)", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              )
+            },
+            { 
+              name: "Bricks", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                </svg>
+              )
+            },
+            { 
+              name: "Cement", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              )
+            },
+            { 
+              name: "Tiles", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                </svg>
+              )
+            },
+            { 
+              name: "Sand / Mitti", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )
+            },
+            { 
+              name: "Road Materials", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              )
+            },
+            { 
+              name: "General Items", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              )
+            }
+          ].map((item, index) => (
+            <div
+              key={item.name}
+              className="group rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:scale-105 hover:border-brandYellow hover:shadow-md h-full flex flex-col justify-center"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                opacity: visibleSections.has("materials") ? 1 : 0,
+                transform: visibleSections.has("materials")
+                  ? "translateY(0)"
+                  : "translateY(20px)",
+                transition: `all 0.6s ease-out ${index * 100}ms`
+              }}
+            >
+              <div className="mb-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:text-brandYellow">
+                {item.icon}
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-brandBlue group-hover:text-brandYellow transition-colors">
+                {item.name}
+              </h3>
+            </div>
+          ))}
+            </div>
+          </div>
+
+          {/* WHO WE SERVE */}
+          <div className="flex flex-col">
+            <div className="min-h-[180px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brandYellow">
+                Our clients
+              </p>
+              <h2 className="mt-3 text-4xl font-extrabold uppercase tracking-[0.15em] text-brandBlue md:text-5xl">
+                <span className="text-brandYellow">.</span>Who We<span className="hidden lg:inline"><br /></span> Serve
+              </h2>
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+                Trusted by professionals and individuals across the construction industry.
+              </p>
+              <div className="mt-6 h-0.5 w-24 bg-brandYellow" />
+            </div>
+
+            <div className="mt-12 grid gap-6 grid-cols-2">
+          {[
+            { 
+              title: "Builders & Developers", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              )
+            },
+            { 
+              title: "Contractors", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              )
+            },
+            { 
+              title: "Infrastructure Projects", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              )
+            },
+            { 
+              title: "Individual House Construction", 
+              icon: (
+                <svg className="h-8 w-8 text-brandBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              )
+            }
+          ].map((item, index) => (
+            <div
+              key={item.title}
+              className="group rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:scale-105 hover:border-brandYellow hover:shadow-md h-full flex flex-col justify-center"
+              style={{
+                animationDelay: `${index * 150}ms`,
+                opacity: visibleSections.has("materials") ? 1 : 0,
+                transform: visibleSections.has("materials")
+                  ? "translateY(0)"
+                  : "translateY(20px)",
+                transition: `all 0.6s ease-out ${index * 150}ms`
+              }}
+            >
+              <div className="mb-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:text-brandYellow">
+                {item.icon}
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-brandBlue group-hover:text-brandYellow transition-colors">
+                {item.title}
+              </h3>
+            </div>
+          ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -600,20 +802,56 @@ Details: ${formData.message || "N/A"}`;
             Why Choose Us
           </h2>
           <p className="mt-6 max-w-lg text-sm text-brandBlue md:text-base">
-            Contractors, builders and homeowners across Chandigarh trust us for
-            honest rates and dependable supply.
+            Your trusted partner for quality construction materials and reliable bulk supply.
           </p>
           <div className="mt-6 h-0.5 w-24 bg-white/80" />
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { label: "Projects supplied", value: "150+" },
-              { label: "Happy contractors", value: "90+" },
-              { label: "Years of experience", value: "10+" }
-            ].map((stat, index) => (
+              { 
+                label: "Quality Assured Materials", 
+                icon: (
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                )
+              },
+              { 
+                label: "Fast & Reliable Delivery", 
+                icon: (
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )
+              },
+              { 
+                label: "Bulk Supply Available", 
+                icon: (
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                )
+              },
+              { 
+                label: "Competitive Pricing", 
+                icon: (
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )
+              },
+              { 
+                label: "Trusted by Contractors", 
+                icon: (
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                )
+              }
+            ].map((item, index) => (
               <div
-                key={stat.label}
-                className="group/stat rounded border border-white/60 bg-brandYellow/10 px-8 py-8 text-white shadow-sm transition-all duration-500 hover:scale-105 hover:border-white hover:bg-brandYellow/20 hover:shadow-lg"
+                key={item.label}
+                className="group/stat rounded border border-white/60 bg-brandYellow/10 px-6 py-6 text-white shadow-sm transition-all duration-500 hover:scale-105 hover:border-white hover:bg-brandYellow/20 hover:shadow-lg"
                 style={{
                   animationDelay: `${index * 150}ms`,
                   opacity: visibleSections.has("fun-facts") ? 1 : 0,
@@ -623,11 +861,11 @@ Details: ${formData.message || "N/A"}`;
                   transition: `all 0.6s ease-out ${index * 150}ms`
                 }}
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] transition-colors duration-300 group-hover/stat:text-white">
-                  {stat.label}
-                </p>
-                <p className="mt-4 text-4xl font-extrabold tracking-tight transition-all duration-300 group-hover/stat:scale-110">
-                  {stat.value}
+                <div className="mb-3 flex items-center justify-center transition-transform duration-300 group-hover/stat:scale-110">
+                  {item.icon}
+                </div>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] transition-colors duration-300 group-hover/stat:text-white">
+                  {item.label}
                 </p>
               </div>
             ))}
@@ -746,8 +984,8 @@ Details: ${formData.message || "N/A"}`;
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brandYellow">
           All about
         </p>
-        <h2 className="mt-3 text-4xl font-extrabold uppercase tracking-[0.15em] text-brandBlue md:text-5xl">
-          <span className="text-brandYellow">.</span>Predio
+        <h2 className="mt-3 text-3xl font-extrabold uppercase tracking-[0.15em] text-brandBlue md:text-5xl">
+          <span className="text-brandYellow">.</span> SHIV SHANKAR BUILDING MATERIAL
         </h2>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
           From a single shop in Village Dhanas, we&apos;ve grown into a trusted
@@ -1009,7 +1247,7 @@ Details: ${formData.message || "N/A"}`;
               <div className="pt-2 text-sm text-slate-700">
                 <p className="font-semibold text-brandBlue">Contact</p>
                 <p>Phone: +91 77400 22757</p>
-                <p>Email: arjunjayani123@gmail.com</p>
+                <p>Email: {CONTACT_EMAIL}</p>
               </div>
 
               <div className="pt-2 text-xs text-slate-500">
@@ -1060,7 +1298,7 @@ Details: ${formData.message || "N/A"}`;
               {
                 title: "Contact Us",
                 line1: "Phone : +91 77400 22757",
-                line2: "arjunjayani123@gmail.com"
+                line2: CONTACT_EMAIL
               }
               ].map((item) => (
                 <div key={item.title} className="flex items-center gap-3">
@@ -1483,7 +1721,7 @@ Details: ${formData.message || "N/A"}`;
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/9877443093?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20building%20materials."
+        href="https://wa.me/7740022757?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20building%20materials."
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-green-600 hover:shadow-xl"
